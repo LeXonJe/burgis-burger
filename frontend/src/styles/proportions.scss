@@ -1,0 +1,21 @@
+// header
+$header-h: 5rem;
+
+// page
+$p-padding-w: clamp(0.5rem, 4vw, 6rem);
+$p-radius: 5px;
+
+// home
+$h-start-w: calc((100vw * 0.5) - 4 * #{$p-padding-w});
+$h-sidebar-w: 40vw;
+
+// order
+$o-padding-h: 12rem;
+
+// cart
+$o-cart-w: clamp(20rem, 30vw, 30rem);
+
+$c-margin-top: 1rem;
+$c-title-h: 3rem;
+$c-submit-h: 16rem;
+$c-list-h: calc(100vh - #{$header-h} - #{$c-title-h} - #{$c-submit-h} - #{$c-margin-top});
