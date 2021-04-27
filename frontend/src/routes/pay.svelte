@@ -42,7 +42,15 @@
 	}
 
 	function submit() {
-		sessionData.pay = active._id;
+		const packet = {
+			list: {},
+			details: sessionData.details,
+			pay: active._id
+		};
+
+		Object.values(sessionData.list).map((item) => {
+			packet.list[item._id] = item.quantity;
+		});
 
 		fetch(url + 'order', {
 			method: 'POST',
@@ -50,7 +58,7 @@
 				Accept: 'application/json',
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify(sessionData)
+			body: JSON.stringify(packet)
 		})
 			.then(() => console.log('Sent order.'))
 			.catch((e) => {

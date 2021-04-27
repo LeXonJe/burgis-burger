@@ -9,7 +9,7 @@ const data = new DB('orders');
 router.post('/', (req, res) => {
   const body = req.body;
   
-  if (('list', 'details' in body)) {
+  if (('list', 'details', 'pay' in body)) {
     const doc = {
       _id: uuidv4(),
       date: new Date().toJSON(),
