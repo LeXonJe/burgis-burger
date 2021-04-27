@@ -11,10 +11,6 @@
 	$: active = money[0];
 	$: isNotRound = (points / active?.points) % 1 != 0;
 
-	function setActive(e) {
-		active = e.detail;
-	}
-
 	const unsubscribe = session.subscribe((data) => {
 		sessionData = data;
 		if ('list' in data && 'details' in data) {
@@ -41,7 +37,13 @@
 			.catch((e) => console.error(e));
 	}
 
+	function setActive(e) {
+		active = e.detail;
+	}
+
 	function submit() {
+		sessionData.pay = active._id;
+
 		fetch(url + 'order', {
 			method: 'POST',
 			headers: {
