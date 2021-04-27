@@ -55,7 +55,7 @@
 			font-weight: 600;
 
 			img {
-				width: 50%;
+				width: 60%;
 				-webkit-user-select: none; /* Safari */
 				-ms-user-select: none; /* IE 10 and IE 11 */
 				user-select: none; /* Standard syntax */

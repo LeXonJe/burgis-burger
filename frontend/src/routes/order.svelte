@@ -9,7 +9,7 @@
 	let selected = {};
 	$: orders = Object.values(selected);
 
-	const addItem = (item) => {
+	function addItem(item) {
 		if (item._id in selected) {
 			selected[item._id].quantity += 1;
 		} else {
@@ -18,9 +18,9 @@
 				quantity: 1
 			};
 		}
-	};
+	}
 
-	const removeItem = (item) => {
+	function removeItem(item) {
 		if (item._id in selected) {
 			selected[item._id].quantity -= 1;
 			if (selected[item._id].quantity < 1) {
@@ -29,19 +29,17 @@
 		} else {
 			throw new Error('Could not find item. Failed to remove it.');
 		}
-	};
+	}
 
-	const deleteItem = (item) => {
+	function deleteItem(item) {
 		if (item._id in selected) {
 			selected = delete selected[item._id] && selected;
 		} else {
 			throw new Error('Could not find item. Failed to delete it.');
 		}
-	};
+	}
 
-	const url = dev
-		? import.meta.env['VITE_DEV_BACKEND_PATH']
-		: import.meta.env['VITE_PROD_BACKEND_PATH'];
+	const url = dev ? import.meta.env.VITE_DEV_BACKEND_PATH : import.meta.env.VITE_PROD_BACKEND_PATH;
 
 	if (browser) {
 		fetch(url + 'menu')

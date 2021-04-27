@@ -23,9 +23,7 @@
 		}
 	});
 
-	const url = dev
-		? import.meta.env['VITE_DEV_BACKEND_PATH']
-		: import.meta.env['VITE_PROD_BACKEND_PATH'];
+	const url = dev ? import.meta.env.VITE_DEV_BACKEND_PATH : import.meta.env.VITE_PROD_BACKEND_PATH;
 
 	if (browser) {
 		fetch(url + 'money')
