@@ -17,7 +17,7 @@ let states = {
   },
 };
 
-let filterableProps = ['type'];
+let filterableProps = ['type', 'price'];
 
 export default function response(req, res, status, data = {}) {
   // object for additional info

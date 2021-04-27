@@ -9,6 +9,9 @@ router.get('/', (req, res) => {
   data.getDocs().then((data) => {
     console.log('Menu was requested.');
     response(req, res, 200, data);
+  }).catch((e) => {
+    response(req, res, 500);
+    console.error(e);
   });
 });
 

@@ -1,13 +1,15 @@
 import cors from 'cors';
 import express from 'express';
-import dotenv from 'dotenv';
+import consoleStamp from 'console-stamp';
+
+consoleStamp(console, { 
+  format: ':date(dd/mm/yyyy HH:MM:ss.l) :label' 
+});
 
 import response from './classes/misc.js';
 import menuRoute from './routes/menuRoute.js';
 import moneyRoute from './routes/moneyRoute.js';
 import orderRoute from './routes/orderRoute.js';
-
-dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3080;

@@ -9,30 +9,22 @@ const data = new DB('orders');
 router.post('/', (req, res) => {
   const body = req.body;
   
-  // Sanitzing the code
-  if (('name', 'order' in body)) {
+  if (('list', 'details' in body)) {
     const doc = {
       _id: uuidv4(),
       date: new Date().toJSON(),
-      name: body.name,
-      order: body.order,
+      ...body,
     };
-
-    if ('x', 'y', 'z' in body) {
-      doc.x = body.x;
-      doc.y = body.y;
-      doc.z = body.z;
-    }
 
     data
       .add(doc)
       .then(() => {
+        response(req, res, 200);
         console.log('Order ' + doc._id + ' was added.');
-        response(req, res, 200, 'Order added.');
       })
       .catch((e) => {
-        console.log(e);
-        response(req, res, 500, 'Order could not be added.');
+        response(req, res, 500);
+        console.error(e);
       });
   } else {
     response(req, res, 400);
@@ -46,12 +38,12 @@ router.delete('/', (req, res) => {
     data
       .delete(id)
       .then(() => {
+        response(req, res, 200);
         console.log('Order ' + id + ' was removed.');
-        response(req, res, 200, 'Order removed.');
       })
       .catch((e) => {
-        console.log(e);
-        response(req, res, 500, 'Order could not be removed.');
+        response(req, res, 500);
+        console.error(e);
       });
   } else {
     response(req, res, 400);
@@ -60,8 +52,11 @@ router.delete('/', (req, res) => {
 
 router.get('/', (req, res) => {
   data.getDocs().then((data) => {
-    console.log('Orders were requested.');
     response(req, res, 200, data);
+    console.log('Orders were requested.');
+  }).catch((e) => {
+    response(req, res, 500);
+    console.error(e);
   });
 });
 
