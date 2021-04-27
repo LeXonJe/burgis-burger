@@ -1,3 +1,7 @@
+<svelte:head>
+	<title>Burgis Burger - Danke!</title>
+</svelte:head>
+
 <div id={'thanks-container'}>
 	<span class={'title'}>VIELEN DANK!</span>
 	<span class={'subtitle'}>Wir werden dir deine Bestellung umgehend liefern.</span>

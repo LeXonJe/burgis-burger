@@ -9,7 +9,7 @@
 	let sessionData = {};
 	let money = [];
 	$: active = money[0];
-	$: isRound = (points / active?.points) % 1 != 0;
+	$: isNotRound = (points / active?.points) % 1 != 0;
 
 	function setActive(e) {
 		active = e.detail;
@@ -31,13 +31,15 @@
 		? import.meta.env['VITE_DEV_BACKEND_PATH']
 		: import.meta.env['VITE_PROD_BACKEND_PATH'];
 
-	fetch(url + 'money')
-		.then((response) => {
-			response.json().then(({ response }) => {
-				money = response;
-			});
-		})
-		.catch((e) => console.error(e));
+	if (browser) {
+		fetch(url + 'money')
+			.then((response) => {
+				response.json().then(({ response }) => {
+					money = response;
+				});
+			})
+			.catch((e) => console.error(e));
+	}
 
 	function encode(packet) {
 		let formBody = [];
@@ -79,6 +81,10 @@
 	onDestroy(unsubscribe);
 </script>
 
+<svelte:head>
+	<title>Burgis Burger - Zahlen</title>
+</svelte:head>
+
 <div id={'pay-container'}>
 	<div class={'center'}>
 		<div class={'title'}>Wie möchtest du bezahlen?</div>
@@ -90,7 +96,7 @@
 			<span class={'count c-1'}>{points} Punkte</span>
 			<span class={'description c-2'}>Du bezahlst mit:</span>
 			<span class={'count c-2'}>{Math.ceil(points / active?.points)}x {active?.name}</span>
-			{#if isRound}
+			{#if isNotRound}
 				<span class={'info c-2'}>Du erhälst Wechselgeld.</span>
 			{/if}
 		</div>

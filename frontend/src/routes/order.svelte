@@ -1,5 +1,5 @@
 <script>
-	import { dev } from '$app/env';
+	import { browser, dev } from '$app/env';
 	import { session } from '$app/stores';
 	import Grid from '../components/grid.svelte';
 	import Cart from '../components/cart.svelte';
@@ -43,13 +43,15 @@
 		? import.meta.env['VITE_DEV_BACKEND_PATH']
 		: import.meta.env['VITE_PROD_BACKEND_PATH'];
 
-	fetch(url + 'menu')
-		.then((response) => {
-			response.json().then(({ response }) => {
-				menu = response;
-			});
-		})
-		.catch((e) => console.error(e));
+	if (browser) {
+		fetch(url + 'menu')
+			.then((response) => {
+				response.json().then(({ response }) => {
+					menu = response;
+				});
+			})
+			.catch((e) => console.error(e));
+	}
 
 	const unsubscribe = session.subscribe((data) => {
 		if (!('list' in data)) {

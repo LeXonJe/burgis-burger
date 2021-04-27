@@ -1,5 +1,5 @@
 <script>
-	import { dev } from '$app/env';
+	import { browser, dev } from '$app/env';
 
 	let item = {
 		_id: '',
@@ -11,13 +11,15 @@
 		? import.meta.env['VITE_DEV_BACKEND_PATH']
 		: import.meta.env['VITE_PROD_BACKEND_PATH'];
 
-	fetch(url + 'menu?type=burger')
-		.then((response) => {
-			response.json().then(({ response }) => {
-				item = response[Math.floor(Math.random() * response.length)];
-			});
-		})
-		.catch((e) => console.error(e));
+	if (browser) {
+		fetch(url + 'menu?type=burger')
+			.then((response) => {
+				response.json().then(({ response }) => {
+					item = response[Math.floor(Math.random() * response.length)];
+				});
+			})
+			.catch((e) => console.error(e));
+	}
 </script>
 
 <svelte:head>
