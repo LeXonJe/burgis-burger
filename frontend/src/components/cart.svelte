@@ -61,9 +61,9 @@
 				{#each orders as order}
 					<ItemOrder
 						{order}
-						on:add={() => addItem(order.item)}
-						on:remove={() => removeItem(order.item)}
-						on:delete={() => deleteItem(order.item)}
+						on:add={() => addItem(order)}
+						on:remove={() => removeItem(order)}
+						on:delete={() => deleteItem(order)}
 					/>
 				{/each}
 			</div>

@@ -10,13 +10,13 @@
 </script>
 
 <div class={'item-order'}>
-	<img src={order.item.image} alt={'Item'} />
+	<img src={order.image} alt={'Item'} />
 	<div class={'info'}>
 		<div class={'title'}>
-			{order.item.name}
+			{order.name}
 		</div>
 		<span class={'cost'}>
-			{order.item.price} Punkte
+			{order.price} Punkte
 		</span>
 		<span class={'sm-btn delete-btn'} on:click={deleteItem}>x</span>
 		<span class={'counter'}>

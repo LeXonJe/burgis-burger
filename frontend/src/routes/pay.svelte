@@ -20,14 +20,14 @@
 		if ('list' in data && 'details' in data) {
 			const list = Object.values(data.list);
 			list.forEach((order) => {
-				points += order.item.price * order.quantity;
+				points += order.price * order.quantity;
 			});
 		} else {
 			browser && goto('/');
 		}
 	});
 
-	let url = dev
+	const url = dev
 		? import.meta.env['VITE_DEV_BACKEND_PATH']
 		: import.meta.env['VITE_PROD_BACKEND_PATH'];
 
@@ -41,36 +41,16 @@
 			.catch((e) => console.error(e));
 	}
 
-	function encode(packet) {
-		let formBody = [];
-		for (let property in packet) {
-			let encodedKey = encodeURIComponent(property);
-			let encodedValue = encodeURIComponent(packet[property]);
-			formBody.push(encodedKey + '=' + encodedValue);
-		}
-		return formBody.join('&');
-	}
-
 	function submit() {
-		let packet = {
-			order: JSON.stringify(sessionData.list),
-			name: sessionData.details.name
-		};
-
-		if (sessionData.details.deliver) {
-			packet.x = sessionData.details.x;
-			packet.y = sessionData.details.y;
-			packet.z = sessionData.details.z;
-		}
-
 		fetch(url + 'order', {
 			method: 'POST',
 			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+				Accept: 'application/json',
+				'Content-Type': 'application/json'
 			},
-			body: encode(packet)
+			body: JSON.stringify(sessionData)
 		})
-			.then(() => console.log('Send order'))
+			.then(() => console.log('Sent order.'))
 			.catch((e) => {
 				throw e;
 			});

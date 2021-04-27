@@ -19,7 +19,6 @@ app.use(cors());
 
 // Allow body parsing
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use('/menu', menuRoute);

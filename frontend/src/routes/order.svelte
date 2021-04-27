@@ -14,7 +14,7 @@
 			selected[item._id].quantity += 1;
 		} else {
 			selected[item._id] = {
-				item,
+				...item,
 				quantity: 1
 			};
 		}
@@ -39,7 +39,7 @@
 		}
 	};
 
-	let url = dev
+	const url = dev
 		? import.meta.env['VITE_DEV_BACKEND_PATH']
 		: import.meta.env['VITE_PROD_BACKEND_PATH'];
 
