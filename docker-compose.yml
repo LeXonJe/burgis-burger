@@ -1,0 +1,37 @@
+version: "3.9"
+services: 
+  frontend:
+    build: ./frontend
+    ports:
+      - '3070:3000'
+    environment:
+      - NODE_ENV: production
+    networks:
+      - projects
+  backend:
+    build: ./backend
+    ports:
+      - '3080:3080'
+    environment: 
+      - NODE_ENV: production
+    networks:
+      - projects
+  couchdb:
+    image: apache/couchdb
+    restart: unless-stopped
+    networks:
+      - projects
+    env_file: 
+      - './.env.db'
+    volumes:
+      - './couchdb:/opt/couchdb/data'
+  cdn:
+    image: nginx
+    networks:
+      - projects
+    volumes:
+      - './cdn:/usr/share/nginx/html:ro'
+
+networks:
+  projects:
+    name: projects
