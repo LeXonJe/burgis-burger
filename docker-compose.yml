@@ -16,6 +16,8 @@ services:
       - NODE_ENV: production
     networks:
       - projects
+    depends_on:
+      - couchdb
   couchdb:
     image: apache/couchdb
     restart: unless-stopped
