@@ -1,4 +1,5 @@
 const sveltePreprocess = require('svelte-preprocess');
+const adapter = require('@sveltejs/adapter-node');
 
 /** @type {import('@sveltejs/kit').Config} */
 module.exports = {
@@ -6,12 +7,7 @@ module.exports = {
 		// hydrate the <div id="svelte"> element in src/app.html
 		target: '#svelte',
 
-    vite: {
-      define: {
-        'DEV_BACKEND_PATH': JSON.stringify(process.env.DEV_BACKEND_PATH),
-        'PROD_BACKEND_PATH': JSON.stringify(process.env.PROD_BACKEND_PATH),
-      }
-    },
+    adapter: adapter({ out: 'build' }),
 
 		files: {
 			assets: 'public/'

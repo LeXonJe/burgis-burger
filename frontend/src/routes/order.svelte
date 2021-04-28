@@ -1,9 +1,10 @@
 <script>
-	import { browser, dev } from '$app/env';
+	import { browser } from '$app/env';
 	import { session } from '$app/stores';
-	import Grid from '../components/grid.svelte';
-	import Cart from '../components/cart.svelte';
+	import Grid from '$lib/grid.svelte';
+	import Cart from '$lib/cart.svelte';
 	import { onDestroy } from 'svelte';
+	import { BACKEND_PATH } from '$lib/env.svelte';
 
 	let menu;
 	let selected = {};
@@ -39,7 +40,7 @@
 		}
 	}
 
-	const url = dev ? import.meta.env.DEV_BACKEND_PATH : import.meta.env.PROD_BACKEND_PATH;
+	const url = BACKEND_PATH;
 
 	if (browser) {
 		fetch(url + 'menu')

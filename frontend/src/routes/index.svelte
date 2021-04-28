@@ -1,5 +1,6 @@
 <script>
-	import { browser, dev } from '$app/env';
+	import { browser } from '$app/env';
+	import { BACKEND_PATH } from '$lib/env.svelte';
 
 	let item = {
 		_id: '',
@@ -7,7 +8,7 @@
 		image: ''
 	};
 
-	const url = dev ? import.meta.env.DEV_BACKEND_PATH : import.meta.env.PROD_BACKEND_PATH;
+	const url = BACKEND_PATH;
 
 	if (browser) {
 		fetch(url + 'menu?type=burger')

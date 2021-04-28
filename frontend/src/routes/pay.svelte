@@ -1,9 +1,10 @@
 <script>
 	import { goto } from '$app/navigation';
-	import { dev, browser } from '$app/env';
+	import { browser } from '$app/env';
 	import { session } from '$app/stores';
 	import { onDestroy } from 'svelte';
-	import Select from '../components/select.svelte';
+	import { BACKEND_PATH } from '$lib/env.svelte';
+	import Select from '$lib/select.svelte';
 
 	let points = 0;
 	let sessionData = {};
@@ -23,7 +24,7 @@
 		}
 	});
 
-	const url = dev ? import.meta.env.DEV_BACKEND_PATH : import.meta.env.PROD_BACKEND_PATH;
+	const url = BACKEND_PATH;
 
 	if (browser) {
 		fetch(url + 'money')
